@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Produto — GameVault</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== CABEÇALHO ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">GAMEVAULT</a>
+      <nav class="menu" id="menu">
+        <a href="index.html">Início</a>
+        <a href="consoles.html">Consoles</a>
+        <a href="jogos.html">Jogos</a>
+        <a href="acessorios.html">Acessórios</a>
+        <a href="carrinho.html">Carrinho</a>
+        <a href="rastreio.html">Rastrear pedido</a>
+      </nav>
+      <div class="acoes">
+        <a href="carrinho.html" class="icone-btn" id="btn-carrinho" aria-label="Carrinho de compras" title="Ver carrinho">
+          <svg viewBox="0 0 24 24"><path d="M3 3h2l2.5 11h10L20 7H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg>
+          <span class="badge" id="contador-carrinho">0</span>
+        </a>
+        <a href="login.html" class="icone-btn" aria-label="Entrar ou criar conta">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        </a>
+        <button class="icone-btn hamburguer" id="btn-menu" aria-label="Abrir menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Notificação Flutuante (Toast) -->
+  <div id="toast" class="toast" hidden></div>
+
+  <!-- ===== CONTEÚDO PRINCIPAL ===== -->
+  <main class="main-produto">
+    <!-- Migalhas de pão (Breadcrumbs) -->
+    <nav class="breadcrumbs" aria-label="Navegação">
+      <a href="index.html">Início</a>
+      <span>/</span>
+      <span id="crumb-categoria">Categoria</span>
+      <span>/</span>
+      <span id="crumb-nome" class="crumb-ativo">Produto</span>
+    </nav>
+
+    <!-- Caixa de Carregamento / Erro -->
+    <div id="produto-loading" class="loading-box">Carregando produto...</div>
+    <div id="produto-erro" class="alerta" hidden></div>
+
+    <!-- Bloco Principal do Produto -->
+    <section id="produto-detalhe" class="detalhe-container" hidden>
+      <!-- Coluna da Esquerda: Galeria de Fotos Reais -->
+      <div class="galeria-col">
+        <div class="foto-principal-wrapper">
+          <span class="tag-destaque" id="tag-destaque">Destaque</span>
+          <img id="foto-principal" src="" alt="Foto do Produto" class="foto-principal">
+        </div>
+        <div class="miniaturas-lista" id="miniaturas-lista">
+          <!-- Miniaturas geradas pelo JS -->
+        </div>
+      </div>
+
+      <!-- Coluna da Direita: Informações e Compra -->
+      <div class="info-col">
+        <span class="categoria-tag" id="prod-categoria">Categoria</span>
+        <h1 class="produto-titulo" id="prod-nome">Nome do Produto</h1>
+
+        <!-- Resumo de Avaliações no Topo -->
+        <div class="avaliacao-resumo-topo" id="topo-avaliacoes">
+          <div class="estrelas-amarelas" id="topo-estrelas">★★★★★</div>
+          <span class="nota-numero" id="topo-nota">5.0</span>
+          <a href="#secao-avaliacoes" class="link-avaliacoes" id="topo-total-avaliacoes">(0 avaliações)</a>
+        </div>
+
+        <!-- Bloco de Preços -->
+        <div class="preco-box">
+          <div class="preco-antigo" id="prod-preco-antigo">R$ 0,00</div>
+          <div class="preco-principal" id="prod-preco">R$ 0,00</div>
+          <div class="preco-pix">à vista no PIX com <strong>10% de desconto</strong></div>
+          <div class="preco-parcelamento" id="prod-parcelas">ou em até 10x sem juros no cartão</div>
+        </div>
+
+        <div class="status-estoque">
+          <span class="ponto-verde"></span> <strong>Em estoque</strong> — Envio com rastreamento garantido
+        </div>
+
+        <p class="descricao-curta" id="prod-desc-curta"></p>
+
+        <!-- Seletor de Quantidade e Ações -->
+        <div class="compra-acoes">
+          <div class="qtd-seletor">
+            <button type="button" id="qtd-menos" aria-label="Diminuir quantidade">−</button>
+            <input type="number" id="qtd-input" value="1" min="1" max="99" readonly>
+            <button type="button" id="qtd-mais" aria-label="Aumentar quantidade">+</button>
+          </div>
+          <button class="btn btn-comprar" id="btn-add-carrinho">Adicionar ao carrinho</button>
+        </div>
+
+        <!-- Simulador de Frete -->
+        <div class="frete-box">
+          <label for="cep-input">Calcular frete e prazo:</label>
+          <div class="frete-input-grupo">
+            <input type="text" id="cep-input" placeholder="00000-000" maxlength="9">
+            <button type="button" class="btn btn-secundario" id="btn-calc-frete">Calcular</button>
+          </div>
+          <div id="frete-resultado" class="frete-resultado" hidden>
+            <div class="frete-opcao">
+              <span><strong>PAC</strong> (5 a 7 dias úteis)</span>
+              <span class="frete-gratis">GRÁTIS</span>
+            </div>
+            <div class="frete-opcao">
+              <span><strong>Sedex Express</strong> (1 a 2 dias úteis)</span>
+              <span>R$ 24,90</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Garantias da Loja -->
+        <div class="garantias-lista">
+          <div class="garantia-item">
+            <span class="garantia-icone">🛡️</span>
+            <div><strong>12 Meses de Garantia</strong> com nota fiscal oficial.</div>
+          </div>
+          <div class="garantia-item">
+            <span class="garantia-icone">🚚</span>
+            <div><strong>Envio Seguro</strong> com código de rastreamento em tempo real.</div>
+          </div>
+          <div class="garantia-item">
+            <span class="garantia-icone">💳</span>
+            <div><strong>Pagamento Seguro</strong> em até 10x sem juros ou desconto no Pix.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Abas / Seção de Informações Detalhadas -->
+    <section class="abas-info-container" id="abas-container" hidden>
+      <div class="abas-navegacao">
+        <button class="aba-btn ativa" data-secao="tab-descricao">Descrição Completa</button>
+        <button class="aba-btn" data-secao="tab-especificacoes">Especificações Técnicas</button>
+        <button class="aba-btn" data-secao="tab-garantia">Garantia & Envio</button>
+      </div>
+
+      <div class="aba-conteudo ativo" id="tab-descricao">
+        <div class="texto-descricao" id="prod-desc-completa"></div>
+      </div>
+
+      <div class="aba-conteudo" id="tab-especificacoes" hidden>
+        <table class="tabela-specs">
+          <tbody id="specs-tabela-corpo"></tbody>
+        </table>
+      </div>
+
+      <div class="aba-conteudo" id="tab-garantia" hidden>
+        <div class="texto-descricao">
+          <h3>Garantia e Autenticidade</h3>
+          <p>Todos os produtos comercializados na <strong>GameVault</strong> são 100% originais, novos, lacrados de fábrica e acompanhados de nota fiscal eletrônica nominal com número de série registrado.</p>
+          <br>
+          <ul class="lista-vantagens">
+            <li><strong>Prazo de garantia:</strong> 12 meses de garantia legal e de fábrica contra defeitos de fabricação.</li>
+            <li><strong>Direito de arrependimento:</strong> 7 dias corridos após o recebimento para troca ou devolução sem custos.</li>
+            <li><strong>Suporte técnico dedicado:</strong> Atendimento direto pelo nosso suporte para configurações e dúvidas.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SEÇÃO DE AVALIAÇÕES ===== -->
+    <section class="secao-avaliacoes" id="secao-avaliacoes" hidden>
+      <h2 class="titulo">Avaliações dos Clientes</h2>
+
+      <div class="avaliacoes-dashboard">
+        <!-- Quadro Resumo da Nota -->
+        <div class="dashboard-resumo">
+          <div class="nota-gigante" id="dash-nota">5.0</div>
+          <div class="estrelas-amarelas grande" id="dash-estrelas">★★★★★</div>
+          <div class="total-legenda" id="dash-total">Com base em 0 avaliações</div>
+        </div>
+
+        <!-- Barras de Progresso das Estrelas -->
+        <div class="dashboard-barras">
+          <div class="barra-linha">
+            <span>5 estrelas</span>
+            <div class="barra-fundo"><div class="barra-preenchimento" style="width: 85%;"></div></div>
+            <span>85%</span>
+          </div>
+          <div class="barra-linha">
+            <span>4 estrelas</span>
+            <div class="barra-fundo"><div class="barra-preenchimento" style="width: 12%;"></div></div>
+            <span>12%</span>
+          </div>
+          <div class="barra-linha">
+            <span>3 estrelas</span>
+            <div class="barra-fundo"><div class="barra-preenchimento" style="width: 3%;"></div></div>
+            <span>3%</span>
+          </div>
+          <div class="barra-linha">
+            <span>2 estrelas</span>
+            <div class="barra-fundo"><div class="barra-preenchimento" style="width: 0%;"></div></div>
+            <span>0%</span>
+          </div>
+          <div class="barra-linha">
+            <span>1 estrela</span>
+            <div class="barra-fundo"><div class="barra-preenchimento" style="width: 0%;"></div></div>
+            <span>0%</span>
+          </div>
+        </div>
+
+        <!-- Botão para abrir o formulário -->
+        <div class="dashboard-acao">
+          <p>Comprou este item ou quer dar sua opinião?</p>
+          <button type="button" class="btn" id="btn-abrir-form-aval">Escrever Avaliação</button>
+        </div>
+      </div>
+
+      <!-- Formulário de Nova Avaliação -->
+      <form id="form-nova-avaliacao" class="card form-avaliacao" hidden>
+        <h3>Deixe sua avaliação sobre este produto</h3>
+        <p class="suave">Sua opinião ajuda outros jogadores a fazerem a melhor escolha!</p>
+
+        <div class="campo">
+          <label>Sua nota:</label>
+          <div class="seletor-estrelas" id="seletor-estrelas">
+            <span data-valor="1" class="estrela-item">★</span>
+            <span data-valor="2" class="estrela-item">★</span>
+            <span data-valor="3" class="estrela-item">★</span>
+            <span data-valor="4" class="estrela-item">★</span>
+            <span data-valor="5" class="estrela-item ativa">★</span>
+          </div>
+          <input type="hidden" name="nota" id="input-nota" value="5">
+        </div>
+
+        <div class="campo">
+          <label for="aval-nome">Seu nome:</label>
+          <input type="text" id="aval-nome" name="nome" placeholder="Ex: Gabriel Silva" required>
+        </div>
+
+        <div class="campo">
+          <label for="aval-titulo">Título da avaliação (opcional):</label>
+          <input type="text" id="aval-titulo" name="titulo" placeholder="Ex: Excelente qualidade, recomendo!">
+        </div>
+
+        <div class="campo">
+          <label for="aval-comentario">Seu comentário detalhado:</label>
+          <textarea id="aval-comentario" name="comentario" rows="4" placeholder="Conte o que achou do desempenho, acabamento, entrega..." required></textarea>
+        </div>
+
+        <div class="botoes-form">
+          <button type="submit" class="btn">Publicar Avaliação</button>
+          <button type="button" class="btn btn-secundario" id="btn-cancelar-aval">Cancelar</button>
+        </div>
+      </form>
+
+      <!-- Lista de Avaliações -->
+      <div class="lista-avaliacoes" id="lista-avaliacoes">
+        <!-- Renderizado dinamicamente -->
+      </div>
+    </section>
+
+    <!-- ===== PRODUTOS RELACIONADOS ===== -->
+    <section class="secao-relacionados" id="secao-relacionados" hidden>
+      <h2 class="titulo">Quem viu este produto também comprou</h2>
+      <div class="grade" id="grade-relacionados"></div>
+    </section>
+  </main>
+
+  <footer class="footer">© 2026 GameVault — <a href="termos.html" style="color: #00f5d4; text-decoration: underline;">Termos de Uso e LGPD</a></footer>
+
+  <script src="script.js?v=2"></script>
+</body>
+</html>

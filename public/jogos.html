@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jogos & Lançamentos — GameVault</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== CABEÇALHO ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">GAMEVAULT</a>
+      <nav class="menu" id="menu">
+        <a href="index.html">Início</a>
+        <a href="consoles.html">Consoles</a>
+        <a href="jogos.html" class="menu-ativo">Jogos</a>
+        <a href="acessorios.html">Acessórios</a>
+        <a href="carrinho.html">Carrinho</a>
+        <a href="rastreio.html">Rastrear pedido</a>
+      </nav>
+      <div class="acoes">
+        <a href="carrinho.html" class="icone-btn" aria-label="Carrinho de compras">
+          <svg viewBox="0 0 24 24"><path d="M3 3h2l2.5 11h10L20 7H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg>
+          <span class="badge" id="contador-carrinho">0</span>
+        </a>
+        <button class="icone-btn hamburguer" id="btn-menu" aria-label="Abrir menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <!-- ===== CONTEÚDO ===== -->
+  <main>
+    <nav class="breadcrumbs" aria-label="Navegação">
+      <a href="index.html">Início</a>
+      <span>/</span>
+      <span class="crumb-ativo">Jogos</span>
+    </nav>
+
+    <section class="categoria-hero">
+      <span class="tag-badge" style="position: static; display: inline-block; margin-bottom: 8px;">Títulos AAA & Lançamentos</span>
+      <h1>Catálogo Completo de Jogos</h1>
+      <p>As melhores histórias, mundos abertos grandiosos, combates eletrizantes e simulações esportivas com dublagem e legendas em Português.</p>
+    </section>
+
+    <div class="categoria-barra-topo">
+      <span class="contador-catalogo">Jogos Disponíveis para PS5, Xbox, PC e Switch</span>
+    </div>
+
+    <!-- Grade preenchida automaticamente pelo script.js -->
+    <section>
+      <div class="grade" data-categoria="jogos"></div>
+    </section>
+
+    <!-- Benefícios -->
+    <section class="banner-vantagens">
+      <div class="vantagem-bloco">
+        <span class="vantagem-icone">🎮</span>
+        <div>
+          <strong>Mídias Físicas e Digitais</strong>
+          <p>Jogos 100% originais com garantia de funcionamento.</p>
+        </div>
+      </div>
+      <div class="vantagem-bloco">
+        <span class="vantagem-icone">🇧🇷</span>
+        <div>
+          <strong>Totalmente em Português</strong>
+          <p>Títulos dublados e legendados em Português do Brasil.</p>
+        </div>
+      </div>
+      <div class="vantagem-bloco">
+        <span class="vantagem-icone">⚡</span>
+        <div>
+          <strong>Envio Imediato</strong>
+          <p>Despacho ágil com código de rastreamento em tempo real.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">© 2026 GameVault — <a href="termos.html" style="color: #00f5d4; text-decoration: underline;">Termos de Uso e LGPD</a></footer>
+
+  <script src="script.js?v=2"></script>
+</body>
+</html>

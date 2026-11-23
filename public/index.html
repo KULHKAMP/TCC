@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GameVault — Consoles, jogos e acessórios</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== CABEÇALHO ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <!-- Logo à esquerda -->
+      <a href="index.html" class="logo">GAMEVAULT</a>
+
+      <!-- Menu de categorias com páginas dedicadas -->
+      <nav class="menu" id="menu">
+        <a href="index.html" class="menu-ativo">Início</a>
+        <a href="consoles.html">Consoles</a>
+        <a href="jogos.html">Jogos</a>
+        <a href="acessorios.html">Acessórios</a>
+        <a href="carrinho.html">Carrinho</a>
+        <a href="rastreio.html">Rastrear pedido</a>
+      </nav>
+
+      <!-- Ícones à direita: carrinho, perfil e hambúrguer -->
+      <div class="acoes">
+        <a href="carrinho.html" class="icone-btn" aria-label="Carrinho de compras" title="Ver carrinho">
+          <svg viewBox="0 0 24 24"><path d="M3 3h2l2.5 11h10L20 7H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg>
+          <span class="badge" id="contador-carrinho">0</span>
+        </a>
+        <a href="login.html" class="icone-btn" aria-label="Entrar ou criar conta">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        </a>
+        <button class="icone-btn hamburguer" id="btn-menu" aria-label="Abrir menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Notificação Flutuante (Toast) -->
+  <div id="toast" class="toast" hidden></div>
+
+  <!-- ===== CONTEÚDO ===== -->
+  <main>
+    <section class="hero">
+      <h1>Seu próximo jogo chega em casa antes do fim de semana.</h1>
+      <p>Consoles, jogos e acessórios com envio para todo o Brasil e rastreio em tempo real.</p>
+      <a href="#jogos" class="btn">Ver jogos</a>
+    </section>
+
+    <!-- Seções com cabeçalho e link para a página dedicada -->
+    <section id="consoles">
+      <div class="secao-cabecalho">
+        <h2 class="titulo">Consoles em Destaque</h2>
+        <a href="consoles.html" class="link-ver-mais">Ver todos os consoles &rarr;</a>
+      </div>
+      <div class="grade" data-categoria="consoles"></div>
+    </section>
+
+    <section id="jogos">
+      <div class="secao-cabecalho">
+        <h2 class="titulo">Jogos em Destaque</h2>
+        <a href="jogos.html" class="link-ver-mais">Ver todos os jogos &rarr;</a>
+      </div>
+      <div class="grade" data-categoria="jogos"></div>
+    </section>
+
+    <section id="acessorios">
+      <div class="secao-cabecalho">
+        <h2 class="titulo">Acessórios em Destaque</h2>
+        <a href="acessorios.html" class="link-ver-mais">Ver todos os acessórios &rarr;</a>
+      </div>
+      <div class="grade" data-categoria="acessorios"></div>
+    </section>
+  </main>
+
+  <footer class="footer">© 2026 GameVault — <a href="termos.html" style="color: #00f5d4; text-decoration: underline;">Termos de Uso e LGPD</a></footer>
+  <script src="script.js?v=2"></script>
+</body>
+</html>

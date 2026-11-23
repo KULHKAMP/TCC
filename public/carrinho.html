@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Carrinho de Compras — GameVault</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== CABEÇALHO ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">GAMEVAULT</a>
+      <nav class="menu" id="menu">
+        <a href="index.html">Início</a>
+        <a href="consoles.html">Consoles</a>
+        <a href="jogos.html">Jogos</a>
+        <a href="acessorios.html">Acessórios</a>
+        <a href="carrinho.html" class="menu-ativo">Carrinho</a>
+        <a href="rastreio.html">Rastrear pedido</a>
+      </nav>
+      <div class="acoes">
+        <a href="carrinho.html" class="icone-btn" aria-label="Carrinho de compras" title="Ver carrinho">
+          <svg viewBox="0 0 24 24"><path d="M3 3h2l2.5 11h10L20 7H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg>
+          <span class="badge" id="contador-carrinho">0</span>
+        </a>
+        <button class="icone-btn hamburguer" id="btn-menu" aria-label="Abrir menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <!-- ===== CONTEÚDO DO CARRINHO ===== -->
+  <main class="main-carrinho">
+    <nav class="breadcrumbs" aria-label="Navegação">
+      <a href="index.html">Início</a>
+      <span>/</span>
+      <span class="crumb-ativo">Carrinho de Compras</span>
+    </nav>
+
+    <h1 class="titulo" style="margin-top: 10px;">Meu Carrinho de Compras</h1>
+
+    <!-- Estado Vazio (quando não há produtos) -->
+    <div id="carrinho-vazio" class="carrinho-vazio-box" hidden>
+      <div class="icone-vazio">🛒</div>
+      <h2>Seu carrinho está vazio</h2>
+      <p>Você ainda não adicionou nenhum console, jogo ou acessório ao carrinho.</p>
+      <a href="index.html" class="btn">Explorar Catálogo</a>
+    </div>
+
+    <!-- Layout do Carrinho: Lista de Itens + Resumo da Compra -->
+    <div id="carrinho-conteudo" class="carrinho-grid" hidden>
+      <!-- Coluna da Esquerda: Itens do Carrinho -->
+      <section class="carrinho-itens-col">
+        <div class="carrinho-cabecalho-tabela">
+          <span>Produto</span>
+          <span>Quantidade</span>
+          <span>Subtotal</span>
+        </div>
+        <div id="lista-itens-carrinho" class="lista-itens-carrinho">
+          <!-- Gerado dinamicamente pelo script.js -->
+        </div>
+
+        <div class="carrinho-acoes-rodape">
+          <a href="index.html" class="btn btn-secundario">&larr; Continuar Comprando</a>
+          <button type="button" class="btn-limpar-carrinho" id="btn-limpar-carrinho">Limpar Carrinho</button>
+        </div>
+      </section>
+
+      <!-- Coluna da Direita: Resumo Financeiro e Finalização -->
+      <aside class="carrinho-resumo-col">
+        <div class="card card-resumo">
+          <h3>Resumo do Pedido</h3>
+
+          <div class="resumo-linha">
+            <span>Subtotal dos itens (<span id="resumo-qtd-itens">0</span>):</span>
+            <span id="resumo-subtotal">R$ 0,00</span>
+          </div>
+
+          <div class="resumo-linha destaque-pix">
+            <span>Desconto no PIX (10%):</span>
+            <span id="resumo-desconto">- R$ 0,00</span>
+          </div>
+
+          <div class="resumo-linha">
+            <span>Frete:</span>
+            <span class="frete-gratis" id="resumo-frete">GRÁTIS</span>
+          </div>
+
+          <div class="resumo-divisor"></div>
+
+          <div class="resumo-linha total-linha">
+            <span>Total à vista:</span>
+            <strong id="resumo-total-pix">R$ 0,00</strong>
+          </div>
+
+          <div class="resumo-parcelamento-texto" id="resumo-parcelas">
+            ou em até 10x sem juros no cartão
+          </div>
+
+          <!-- Botão Principal de Concluir Pedido -->
+          <button type="button" class="btn btn-finalizar" id="btn-finalizar-pedido">
+            Finalizar Compra
+          </button>
+
+          <div class="garantias-resumo">
+            <div>🛡️ <strong>Compra 100% Protegida</strong></div>
+            <div>🚚 <strong>Envio com Código de Rastreio</strong></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Modal de Pedido Concluído com Sucesso -->
+  <div id="modal-sucesso-pedido" class="modal-overlay" hidden>
+    <div class="modal-card" style="text-align: center;">
+      <span style="font-size: 3.5rem; display: block; margin-bottom: 12px;">🎉</span>
+      <h2 style="color: var(--ok); margin-bottom: 8px;">Pedido Realizado com Sucesso!</h2>
+      <p style="color: var(--suave); margin-bottom: 18px;">
+        Seu pedido foi gravado no banco de dados e já entrou em preparação para envio.
+      </p>
+
+      <div class="pedido-sucesso-box">
+        <div style="font-size: 0.9rem; color: var(--suave);">Número do Pedido: <strong id="sucesso-pedido-id" style="color: var(--txt);">#1</strong></div>
+        <div style="font-size: 1.1rem; margin-top: 6px;">Código de Rastreio:</div>
+        <div class="codigo-destaque" id="sucesso-codigo-rastreio">GV123456789BR</div>
+      </div>
+
+      <div style="display: flex; gap: 12px; margin-top: 24px; justify-content: center; flex-wrap: wrap;">
+        <a href="rastreio.html" id="link-rastrear-sucesso" class="btn">Rastrear Entrega Agora</a>
+        <a href="index.html" class="btn btn-secundario">Voltar para a Loja</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">© 2026 GameVault — <a href="termos.html" style="color: #00f5d4; text-decoration: underline;">Termos de Uso e LGPD</a></footer>
+
+  <script src="script.js?v=2"></script>
+</body>
+</html>

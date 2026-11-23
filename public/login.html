@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar — GameVault</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== CABEÇALHO ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">GAMEVAULT</a>
+      <nav class="menu" id="menu">
+        <a href="index.html">Início</a>
+        <a href="consoles.html">Consoles</a>
+        <a href="jogos.html">Jogos</a>
+        <a href="acessorios.html">Acessórios</a>
+        <a href="carrinho.html">Carrinho</a>
+        <a href="rastreio.html">Rastrear pedido</a>
+      </nav>
+      <div class="acoes">
+        <a href="carrinho.html" class="icone-btn" aria-label="Carrinho de compras" title="Ver carrinho">
+          <svg viewBox="0 0 24 24"><path d="M3 3h2l2.5 11h10L20 7H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg>
+          <span class="badge" id="contador-carrinho">0</span>
+        </a>
+        <a href="login.html" class="icone-btn" aria-label="Entrar ou criar conta">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        </a>
+        <button class="icone-btn hamburguer" id="btn-menu" aria-label="Abrir menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="painel">
+      <div class="abas">
+        <button type="button" class="aba ativa" data-alvo="form-login">Entrar</button>
+        <button type="button" class="aba" data-alvo="form-cadastro">Criar conta</button>
+      </div>
+
+      <div class="alerta" id="alerta" hidden></div>
+
+      <!-- Formulário de LOGIN com data-rota="login" -->
+      <form id="form-login" class="form" data-rota="login" novalidate>
+        <div class="campo">
+          <label for="l-email">E-mail</label>
+          <input id="l-email" name="email" type="email" autocomplete="email" placeholder="voce@email.com">
+          <small class="erro-msg"></small>
+        </div>
+        <div class="campo">
+          <label for="l-senha">Senha</label>
+          <input id="l-senha" name="senha" type="password" autocomplete="current-password">
+          <small class="erro-msg"></small>
+        </div>
+        <button class="btn" type="submit">Entrar</button>
+      </form>
+
+      <!-- Formulário de CADASTRO com data-rota="cadastro" -->
+      <form id="form-cadastro" class="form" data-rota="cadastro" novalidate hidden>
+        <div class="campo">
+          <label for="c-nome">Nome</label>
+          <input id="c-nome" name="nome" type="text" autocomplete="name" placeholder="Seu nome">
+          <small class="erro-msg"></small>
+        </div>
+        <div class="campo">
+          <label for="c-email">E-mail</label>
+          <input id="c-email" name="email" type="email" autocomplete="email" placeholder="voce@email.com">
+          <small class="erro-msg"></small>
+        </div>
+        <div class="campo">
+          <label for="c-senha">Senha (mínimo 8 caracteres)</label>
+          <input id="c-senha" name="senha" type="password" autocomplete="new-password">
+          <small class="erro-msg"></small>
+        </div>
+
+        <!-- Termos de Uso e Consentimento LGPD (Art. 7º, I da Lei 13.709/2018) -->
+        <div class="campo campo-lgpd" style="margin: 14px 0 20px;">
+          <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: 0.85rem; color: #cbd5e1; line-height: 1.4;">
+            <input id="c-termos" name="termos" type="checkbox" required checked style="width: 18px; height: 18px; accent-color: var(--primaria); margin-top: 2px;">
+            <span>
+              Declaro que li e concordo com os <a href="termos.html" target="_blank" style="color: #00f5d4; text-decoration: underline;">Termos de Uso</a> e autorizo o tratamento dos meus dados conforme a <a href="termos.html#lgpd" target="_blank" style="color: #00f5d4; text-decoration: underline;">Política de Privacidade (LGPD)</a>.
+            </span>
+          </label>
+          <small class="erro-msg" id="erro-termos"></small>
+        </div>
+
+        <button class="btn" type="submit">Criar conta</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">© 2026 GameVault — <a href="termos.html" style="color: #00f5d4; text-decoration: underline;">Termos de Uso e LGPD</a></footer>
+  <script src="script.js?v=2"></script>
+</body>
+</html>
